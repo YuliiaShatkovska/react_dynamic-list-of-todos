@@ -25,7 +25,7 @@ export const TodoModal: React.FC<Props> = ({
       .finally(() => setIsLoading(false));
   }, [userId]);
 
-  const handleCloseModal = () => {
+  const handleModalClose = () => {
     setSelectedTodo(null);
   };
 
@@ -50,7 +50,7 @@ export const TodoModal: React.FC<Props> = ({
               type="button"
               className="delete"
               data-cy="modal-close"
-              onClick={handleCloseModal}
+              onClick={handleModalClose}
             />
           </header>
 
