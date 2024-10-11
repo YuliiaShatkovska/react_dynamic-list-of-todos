@@ -4,21 +4,23 @@ import { Filters } from '../../types/Filters';
 const filters = ['All', 'Active', 'Completed'];
 
 type Props = {
-  setSelectedFilter: React.Dispatch<React.SetStateAction<Filters>>;
+  handleFilterChange: React.Dispatch<React.SetStateAction<Filters>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
+  selectedFilter: Filters;
 };
 
 export const TodoFilter: React.FC<Props> = ({
-  setSelectedFilter,
+  handleFilterChange,
   setQuery,
   query,
+  selectedFilter,
 }) => {
-  const handleSelectFilter = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedFilter(event.target.value as Filters);
+  const onFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    handleFilterChange(event.target.value as Filters);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const inInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value.trimStart());
   };
 
@@ -26,7 +28,11 @@ export const TodoFilter: React.FC<Props> = ({
     <form className="field has-addons">
       <p className="control">
         <span className="select">
-          <select data-cy="statusSelect" onChange={handleSelectFilter}>
+          <select
+            data-cy="statusSelect"
+            value={selectedFilter}
+            onChange={onFilterChange}
+          >
             {filters.map(filter => (
               <option value={filter.toLowerCase()} key={filter}>
                 {filter}
@@ -43,7 +49,7 @@ export const TodoFilter: React.FC<Props> = ({
           className="input"
           placeholder="Search..."
           value={query}
-          onChange={handleInputChange}
+          onChange={inInputChange}
         />
         <span className="icon is-left">
           <i className="fas fa-magnifying-glass" />

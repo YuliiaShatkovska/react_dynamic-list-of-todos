@@ -29,20 +29,25 @@ export const TodoList: React.FC<Props> = ({
     <tbody>
       {todos.map(todo => {
         const { id, completed, title } = todo;
+        const isSelected = selectedTodo && selectedTodo.id === id;
 
         return (
-          <tr data-cy="todo" className="" key={id}>
+          <tr
+            data-cy="todo"
+            className={isSelected ? 'has-background-info-light' : ''}
+            key={id}
+          >
             <td className="is-vcentered">{id}</td>
 
-            {completed ? (
-              <td className="is-vcentered">
+            <td className="is-vcentered">
+              {completed ? (
                 <span className="icon" data-cy="iconCompleted">
                   <i className="fas fa-check" />
                 </span>
-              </td>
-            ) : (
-              <td className="is-vcentered" />
-            )}
+              ) : (
+                ''
+              )}
+            </td>
 
             <td className="is-vcentered is-expanded">
               <p className={completed ? 'has-text-success' : 'has-text-danger'}>
@@ -59,7 +64,7 @@ export const TodoList: React.FC<Props> = ({
               >
                 <span className="icon">
                   <i
-                    className={`far ${selectedTodo && selectedTodo.id === id ? 'fa-eye-slash' : 'fa-eye'}`}
+                    className={`far ${isSelected ? 'fa-eye-slash' : 'fa-eye'}`}
                   />
                 </span>
               </button>

@@ -37,20 +37,23 @@ export const App: React.FC = () => {
 
             <div className="block">
               <TodoFilter
-                setSelectedFilter={setSelectedFilter}
+                handleFilterChange={setSelectedFilter}
                 setQuery={setQuery}
                 query={query}
+                selectedFilter={selectedFilter}
               />
             </div>
 
             <div className="block">
               {isLoading && <Loader />}
 
-              <TodoList
-                todos={visibleTodos}
-                setSelectedTodo={setSelectedTodo}
-                selectedTodo={selectedTodo}
-              />
+              {!isLoading && todos.length > 0 && (
+                <TodoList
+                  todos={visibleTodos}
+                  setSelectedTodo={setSelectedTodo}
+                  selectedTodo={selectedTodo}
+                />
+              )}
             </div>
           </div>
         </div>

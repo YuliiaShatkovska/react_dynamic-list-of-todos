@@ -21,7 +21,7 @@ export const getFilteredTodos = (
         return todo.completed;
 
       default:
-        return todo;
+        return true;
     }
   });
 
